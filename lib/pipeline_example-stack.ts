@@ -9,7 +9,7 @@ export class PipelineExampleStack extends cdk.Stack {
     super(scope, id, props);
 
     // The code that defines your stack goes here
-
+    //Comment
     const lambda_function = new lambda.Function(this, "LambdaFucntion", {
       runtime: lambda.Runtime.NODEJS_12_X,            ///set nodejs runtime environment
       code: lambda.Code.fromInline('exports.handler = function(event, ctx, cb) { console.log("done"); return cb(null, "hi"); }'),          ///path for lambda function directory
