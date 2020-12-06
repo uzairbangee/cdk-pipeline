@@ -65,7 +65,7 @@ export class PipelineExampleStack extends cdk.Stack {
           repo: "cdk-pipeline",
           oauthToken: cdk.SecretValue.secretsManager('GITHUB_TOKEN_AWS_SOURCE'), ///create token on github and save it on aws secret manager
           output: sourceOutput,                                       ///Output will save in the sourceOutput Artifact
-          branch: "master",                                           ///Branch of your repo
+          branch: "main",                                           ///Branch of your repo
         }),
       ],
     })
