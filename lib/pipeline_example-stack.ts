@@ -2,12 +2,21 @@ import * as cdk from '@aws-cdk/core';
 import * as CodePipeline from '@aws-cdk/aws-codepipeline'
 import * as CodePipelineAction from '@aws-cdk/aws-codepipeline-actions'
 import * as CodeBuild from '@aws-cdk/aws-codebuild'
+import * as lambda from "@aws-cdk/aws-lambda";
 
 export class PipelineExampleStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
     // The code that defines your stack goes here
+
+    const lambda_function = new lambda.Function(this, "LambdaFucntion", {
+      runtime: lambda.Runtime.NODEJS_12_X,            ///set nodejs runtime environment
+      code: lambda.Code.fromInline('exports.handler = function(event, ctx, cb) { console.log("done"); return cb(null, "hi"); }'),          ///path for lambda function directory
+      handler: 'index.handler',                       ///specfic fucntion in specific file
+      timeout: cdk.Duration.seconds(10),              ///Time for function to break. limit upto 15 mins
+    })
+
 
     // Artifact from source stage
     const sourceOutput = new CodePipeline.Artifact();
